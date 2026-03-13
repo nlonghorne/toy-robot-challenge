@@ -270,18 +270,10 @@ class RobotUnitTests {
 
     @Test
     void reportTest() {
-        PrintStream originalSystemOut = System.out;
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(output));
+        testRobot.place(0, 0, Direction.WEST);
+        String actualOutput = testRobot.report();
 
-        try {
-            testRobot.place(0, 0, Direction.WEST);
-            testRobot.report();
-
-            String expectedOutput = "Co-ordinates: " + 0 + ", " + 0 + ", WEST" + System.lineSeparator();
-            assertEquals(expectedOutput, output.toString());
-        } finally {
-            System.setOut(originalSystemOut);
-        }
+        String expectedOutput = "Co-ordinates: " + 0 + ", " + 0 + ", WEST";
+        assertEquals(expectedOutput, actualOutput);
     }
 }
